@@ -1,0 +1,20 @@
+{
+  "name": "gitco",
+  "version": "0.0.1",
+  "description": "project container blocks",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "bin": {
+  	"gitco": "./bin/books"
+  },
+  "author": "Max Olson",
+  "license": "ISC",
+  "dependencies": {
+    "csv": "^0.4.0",
+    "lodash": "^2.4.1",
+    "commander": "^2.3.0",
+    "glob": "^4.0.6"
+  }
+}
