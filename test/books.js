@@ -33,6 +33,23 @@ describe('#getAccounts', function() {
     });
 });
 
+describe('#getCheck', function() {
+    it('should return true if books balance', function(done) {
+        books.getCheck(BLOCKS.a)
+        .then(function(balanced) {
+            expect(balanced).to.be.true;
+        }).then(done, done);
+    });
+
+    it('should return false if books don\'t balance', function(done) {
+        books.getAccounts(BLOCKS.a)
+        .then(function(accounts) {
+            accounts[0].entries[0][2] += 1;
+            expect(books.checkAccounts(accounts)).to.be.false;
+        }).then(done, done);
+    });
+});
+
 describe('#getBalanceSheet', function() {
     it('should output full balance sheet', function(done) {
         books.getBalanceSheet(BLOCKS.a)

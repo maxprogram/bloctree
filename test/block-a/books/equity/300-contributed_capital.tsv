@@ -1,2 +1,2 @@
-id	datetime	amount	reference	description
-1	2014-09-20T21:39:45.692Z	200.00	100-1	Start books
+id	datetime	debit	credit	reference	description
+1	2014-09-20T21:39:45.692Z		200.00	100-1	Start books

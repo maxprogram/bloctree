@@ -1,4 +1,4 @@
-id	datetime	amount	reference	description
-1	2014-09-20T21:39:45.692Z	200.00	300-1	Start books
-2	2014-09-21T00:45:48.772Z	100.00	201-1	Borrow from Wells Fargo
-3	2014-09-20T21:39:45.692Z	52.33	400-1	Job
+id	datetime	debit	credit	reference	description
+1	2014-09-20T21:39:45.692Z	200.00		300-1	Start books
+2	2014-09-21T00:45:48.772Z	100.00		201-1	Borrow from Wells Fargo
+3	2014-09-20T21:39:45.692Z	52.33		400-1	Job
