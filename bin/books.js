@@ -17,7 +17,7 @@ prog.command('balance [source_dir]')
 
     console.log('Building %s...', dir);
 
-    books.balanceSheet(dir, options)
+    books.getBalanceSheet(dir, options)
     .then(function(bs) {
         return JSON.stringify(bs, null, 2);
     })

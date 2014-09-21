@@ -10,7 +10,7 @@ describe('Books', function() {
 
 describe('#balanceSheet', function() {
     it('should output full balance sheet', function(done) {
-        books.balanceSheet(BLOCKS.a)
+        books.getBalanceSheet(BLOCKS.a)
         .then(function(bs) {
             expect(bs.assets.cash).to.equal(300);
             expect(bs.equity.contributed_capital).to.equal(200);
