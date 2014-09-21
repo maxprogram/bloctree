@@ -7,14 +7,18 @@
     "test": "mocha"
   },
   "bin": {
-  	"gitco": "./bin/books"
+    "gitco": "./bin/books.js"
   },
   "author": "Max Olson",
   "license": "ISC",
   "dependencies": {
-    "csv": "^0.4.0",
+    "q": "^1.0.1",
+    "graceful-fs": "^3.0.2",
+    "fs-extra": "^0.10.0",
+    "glob": "^4.0.6",
     "lodash": "^2.4.1",
     "commander": "^2.3.0",
-    "glob": "^4.0.6"
+    "csv": "^0.4.0",
+    "chai": "^1.9.1"
   }
 }
