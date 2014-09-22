@@ -9,7 +9,7 @@ var BLOCKS = {
 
 var accts;
 
-describe('Books', function() {
+describe('', function() {
 
 describe('#getAccountList', function() {
     it('should output accounts list', function(done) {
@@ -31,7 +31,7 @@ describe('#getAccounts', function() {
             accts = accounts;
             var cash = accounts.find(100);
             expect(cash.entries).to.be.an('array');
-            expect(cash.entries[0][2]).to.equal('200.00');
+            expect(cash.entries[0][2]).to.equal('200');
         }).then(done, done);
     });
 });
@@ -55,6 +55,22 @@ describe('#getBalanceSheet', function() {
         var bs = books.getBalanceSheet(accts);
         expect(bs.assets.cash).to.equal(352.33);
         expect(bs.equity.contributed_capital).to.equal(200);
+    });
+});
+
+});
+
+describe('#record', function() {
+
+describe('#entry()', function() {
+    it('should add entry to account', function(done) {
+        books.record.entry(accts, "cash", {
+            debit: 88,
+            description: 'test'
+        }).then(function(entry) {
+            expect(entry[2]).to.equal(88);
+            expect(entry[5]).to.equal('test');
+        }).then(done, done);
     });
 });
 

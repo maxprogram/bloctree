@@ -4,7 +4,7 @@
   "description": "project container blocks",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha ./test/index --reporter list"
   },
   "bin": {
     "gitco": "./bin/books.js"
