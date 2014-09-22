@@ -13,4 +13,4 @@ node_modules
 # vim swapfile
 *.swp
 
-sandbox
+sandbox.*
