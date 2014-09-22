@@ -67,7 +67,7 @@ var books = BOOKS.a;
 
 describe('#entry()', function() {
     it('should add entry to account', function(done) {
-        books.record.entry(accts, "cash", {
+        books.record.entry("cash", {
             debit: 88,
             description: 'test'
         }).then(function(entry) {
