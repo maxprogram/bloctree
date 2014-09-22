@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+var Q = require('q');
 var _ = require('lodash');
 
 var Books = require('../lib/books');
@@ -54,7 +55,7 @@ describe('#isBalanced', function() {
 describe('#getBalanceSheet', function() {
     it('should output full balance sheet', function() {
         var bs = books.getBalanceSheet();
-        expect(bs.assets.cash).to.equal(352.33);
+        expect(bs.assets.cash).to.be.above(300);
         expect(bs.equity.contributed_capital).to.equal(200);
     });
 });
@@ -88,6 +89,23 @@ describe('#remove()', function() {
             var cash  = books.find('cash');
             var lastEntry = cash.entries[cash.entries.length-1];
             expect(lastEntry[2]).to.not.equal(88);
+        }).then(done, done);
+    });
+});
+
+describe('#transaction()', function() {
+    it('should add transaction to account', function(done) {
+        var id;
+        books.record.transaction("cash", 400, {
+            debit: 45.62,
+            description: 'transaction test'
+        }).then(function(t) {
+            expect(t[0][2]).to.equal(45.62);
+            expect(t[1][3]).to.equal(45.62);
+            return Q.all([
+                books.record.remove("cash",t[0][0]),
+                books.record.remove(400,t[1][0])
+            ]).then(function() {});
         }).then(done, done);
     });
 });
