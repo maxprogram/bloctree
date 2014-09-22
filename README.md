@@ -1,4 +1,7 @@
 
+* Add transaction
+* Edit transaction
+* Add account
 
 ## Accounting books
 

@@ -7,7 +7,7 @@ var BLOCKS = {
     a: __dirname + '/block-a'
 };
 
-var accts;
+var accts, id;
 
 describe('', function() {
 
@@ -68,8 +68,23 @@ describe('#entry()', function() {
             debit: 88,
             description: 'test'
         }).then(function(entry) {
+            id = entry[0];
             expect(entry[2]).to.equal(88);
             expect(entry[5]).to.equal('test');
+        }).then(done, done);
+    });
+});
+
+describe('#remove()', function() {
+    it('should remove entry from account', function(done) {
+        books.record.remove(accts, "cash", id)
+        .then(function() {
+            return books.getAccounts(BLOCKS.a);
+        })
+        .then(function(accounts) {
+            var cash  = accounts.find('cash');
+            var lastEntry = cash.entries[cash.entries.length-1];
+            expect(lastEntry[2]).to.not.equal(88);
         }).then(done, done);
     });
 });
