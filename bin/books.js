@@ -5,7 +5,7 @@ var path = require('path');
 var prog = require('commander');
 
 var pkg = require('../package.json');
-var books = require('../lib/books');
+var Books = require('../lib/books');
 
 prog.version(pkg.version);
 
@@ -17,7 +17,8 @@ prog.command('balance [source_dir]')
 
     console.log('Building %s...', dir);
 
-    books.getAccounts(dir)
+    var books = new Books(dir, options);
+    books.getAccounts()
     .then(books.getBalanceSheet)
     .then(function(bs) {
         return JSON.stringify(bs, null, 2);

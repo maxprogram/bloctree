@@ -1,22 +1,24 @@
 var expect = require('chai').expect;
 var _ = require('lodash');
 
-var books = require('../lib/books');
+var Books = require('../lib/books');
 
-var BLOCKS = {
-    a: __dirname + '/block-a'
+var BOOKS = {
+    a: new Books(__dirname + '/block-a')
 };
 
 var accts;
 
 describe('', function() {
 
+var books = BOOKS.a;
+
 describe('#getAccountList', function() {
     it('should output accounts list', function(done) {
-        books.getAccountList(BLOCKS.a)
+        books.getAccountList()
         .then(function(accounts) {
-            var cash  = accounts.find('cash');
-            var sales = accounts.find('sales');
+            var cash  = books.find('cash');
+            var sales = books.find('sales');
             expect(sales.type).to.equal('equity');
             expect(sales.group).to.equal('revenue');
             expect(cash.group).to.be.null;
@@ -26,10 +28,9 @@ describe('#getAccountList', function() {
 
 describe('#getAccounts', function() {
     it('should read account entries', function(done) {
-        books.getAccounts(BLOCKS.a)
+        books.getAccounts()
         .then(function(accounts) {
-            accts = accounts;
-            var cash = accounts.find(100);
+            var cash = books.find(100);
             expect(cash.entries).to.be.an('array');
             expect(cash.entries[0][2]).to.equal('200');
         }).then(done, done);
@@ -38,12 +39,12 @@ describe('#getAccounts', function() {
 
 describe('#isBalanced', function() {
     it('should return true if books balance', function() {
-        var isBalanced = books.isBalanced(accts);
+        var isBalanced = books.isBalanced();
         expect(isBalanced).to.be.true;
     });
 
     it('should return false if books don\'t balance', function() {
-        var bad = _.cloneDeep(accts);
+        var bad = _.cloneDeep(books.accounts);
         bad[0].entries[0][2] += 1;
         var isBalanced = books.isBalanced(bad);
         expect(isBalanced).to.be.false;
@@ -52,7 +53,7 @@ describe('#isBalanced', function() {
 
 describe('#getBalanceSheet', function() {
     it('should output full balance sheet', function() {
-        var bs = books.getBalanceSheet(accts);
+        var bs = books.getBalanceSheet();
         expect(bs.assets.cash).to.equal(352.33);
         expect(bs.equity.contributed_capital).to.equal(200);
     });
@@ -61,6 +62,8 @@ describe('#getBalanceSheet', function() {
 });
 
 describe('#record', function() {
+
+var books = BOOKS.a;
 
 describe('#entry()', function() {
     it('should add entry to account', function(done) {

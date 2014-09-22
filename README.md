@@ -1,4 +1,8 @@
 
+* Remove entry
+* Add transaction
+* Edit transaction
+* Add account
 
 ## Accounting books
 
