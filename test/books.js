@@ -79,16 +79,30 @@ describe('#entry()', function() {
     });
 });
 
+describe('#update()', function() {
+    it('should edit entry', function(done) {
+        books.record.update("cash", id, {
+            debit: 33,
+        }).then(function(entry) {
+            expect(entry[2]).to.equal(33);
+            return books.getAccounts();
+        }).then(function() {
+            var cash  = books.find('cash');
+            var lastEntry = cash.entries[cash.entries.length-1];
+            expect(parseFloat(lastEntry[2])).to.equal(33);
+        }).then(done, done);
+    });
+});
+
 describe('#remove()', function() {
     it('should remove entry from account', function(done) {
         books.record.remove("cash", id)
         .then(function() {
             return books.getAccounts();
-        })
-        .then(function() {
+        }).then(function() {
             var cash  = books.find('cash');
             var lastEntry = cash.entries[cash.entries.length-1];
-            expect(lastEntry[2]).to.not.equal(88);
+            expect(parseFloat(lastEntry[2])).to.not.equal(33);
         }).then(done, done);
     });
 });
