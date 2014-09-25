@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var Q = require('q');
 var _ = require('lodash');
+var fs = require('../lib/fs');
 
 var Books = require('../lib/books');
 
@@ -120,6 +121,25 @@ describe('#transaction()', function() {
                 books.record.remove("cash",t[0][0]),
                 books.record.remove(400,t[1][0])
             ]).then(function() {});
+        }).then(done, done);
+    });
+});
+
+});
+
+describe('#account', function() {
+
+var books = BOOKS.a;
+
+describe('#add()', function() {
+    it('should add a new account', function(done) {
+        books.account.add('Consulting','revenues')
+        .then(function(account) {
+            expect(account.name).to.eql('consulting');
+            expect(account.type).to.eql('equity');
+            expect(account.group).to.eql('revenue');
+            expect(account.id).to.eql(401);
+            return fs.remove(account.file);
         }).then(done, done);
     });
 });
