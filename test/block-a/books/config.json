@@ -1,7 +1,7 @@
 {
   "transactions": {
     "expense": {
-      "debit": "expense",
+      "debit": "expenses",
       "credit": "cash"
     },
     "contribution": {

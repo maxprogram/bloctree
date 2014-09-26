@@ -1,5 +1,5 @@
 {
-  "name": "gitco",
+  "name": "bloctree",
   "version": "0.0.1",
   "description": "project container blocks",
   "main": "index.js",
@@ -7,18 +7,23 @@
     "test": "mocha ./test/index --reporter list"
   },
   "bin": {
-    "gitco": "./bin/books.js"
+    "bloctree": "./bin/books.js"
   },
   "author": "Max Olson",
   "license": "ISC",
+  "devDependencies": {
+    "mocha": "~1.20.1",
+    "chai": "~1.9.1"
+  },
   "dependencies": {
     "q": "^1.0.1",
     "graceful-fs": "^3.0.2",
     "fs-extra": "^0.10.0",
     "glob": "^4.0.6",
     "lodash": "^2.4.1",
+
     "commander": "^2.3.0",
-    "csv": "^0.4.0",
-    "chai": "^1.9.1"
+    "colors": "~0.6.2",
+    "csv": "^0.4.0"
   }
 }

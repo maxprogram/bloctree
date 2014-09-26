@@ -1,12 +1,31 @@
+# Bloctree
 
-* Add transaction
-* Edit transaction
-* Add account
+```sh
+$ npm install -g bloctree
+$ bloctree init newProject
+$ cd newProject
+$ bloctree about
+```
 
 ## Accounting books
 
-**Build a balance sheet:**
-    gitco balance [source_dir]
+```sh
+# New account:
+$ bloctree new:account [name] [category]
+$ bloctree new:account receivables assets/current
+
+# Record a transaction:
+$ bloctree record [transaction] [amount]
+$ bloctree record expense 155.12 -m "Wireless keyboard"
+$ bloctree record sale 120 -m "2 billable hours"
+
+# Record separate entries:
+$ bloctree new:entry receivable 800 -m "Rent payment"
+$ bloctree new:entry sales 800 -m "Rent payment"
+
+# Build a balance sheet:
+$ bloctree get:balance [source_dir]
+```
 
 ### Double-entry bookkeeping
 
