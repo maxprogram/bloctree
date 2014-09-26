@@ -117,6 +117,7 @@ describe('#transaction()', function() {
         }).then(function(t) {
             expect(t[0][2]).to.equal(45.62);
             expect(t[1][3]).to.equal(45.62);
+            expect(t[0][4].split('-')[1]).to.equal(t[1][0]+'');
             return Q.all([
                 books.record.remove("cash",t[0][0]),
                 books.record.remove(400,t[1][0])
