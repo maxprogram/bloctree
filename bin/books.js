@@ -51,6 +51,32 @@ prog.command('record [name] [amount]')
     .fail(log.error);
 });
 
+prog.command('new:entry [name]')
+.description('Records a single entry')
+.option('-d, --debit <amount>', 'Debit')
+.option('-c, --credit <amount>', 'Credit')
+.option('-m, --message <description>', 'Description of transaction')
+.action(function(name, options) {
+    if (!name) return log.error('Need account name');
+    if (!options.debit && !options.credit) return log.error('Need entry amount');
+
+    log.report('record', '%s...', name);
+    books = new Books(dir, options);
+    books.getAccounts()
+    .then(function(config) {
+        return books.record.entry(name, {
+            debit: options.debit || 0,
+            credit: options.credit || 0,
+            description: options.message
+        });
+    })
+    .then(function(entries) {
+        var amt = parseFloat(options.debit || options.credit).toFixed(2);
+        log.report('done', amt + ' in ' + name + ' recorded');
+    })
+    .fail(log.error);
+});
+
 prog.command('new:account [name] [category]')
 .description('Create a new account')
 .action(function(name, category, options) {
