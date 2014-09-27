@@ -11,6 +11,7 @@ var util = require('../lib/util');
 var Books = require('../lib/books');
 
 var log = require('./log');
+var layout = require('./layout');
 
 
 prog.version(pkg.version);
@@ -77,9 +78,9 @@ prog.command('get:balance')
     books.getAccounts()
     .then(books.getBalanceSheet)
     .then(function(bs) {
-        return JSON.stringify(bs, null, 2);
+        return layout.printBalanceSheet(bs);
     })
-    .then(log.promise('done'))
+    .then(console.log)
     .fail(log.error);
 });
 

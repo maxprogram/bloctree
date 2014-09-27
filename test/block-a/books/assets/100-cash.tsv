@@ -1,4 +1,5 @@
 id	datetime	debit	credit	reference	description
 1	2014-09-20T21:39:45.692Z	200		300-1	Start books
-2	2014-09-21T00:45:48.772Z	100		201-1	Borrow from Wells Fargo
+2	2014-09-21T00:45:48.772Z	100		200-1	Borrow from Wells Fargo
 3	2014-09-20T21:39:45.692Z	52.33		400-1	Job
+4	2014-09-20T21:39:45.692Z		40	600-1	Cliche inspirational poster
