@@ -30,6 +30,29 @@ prog.command('new [name]')
     .fail(log.error);
 });
 
+function getBlocConfig() {
+    try {
+        return require(path.join(dir, 'bloc.json'));
+    } catch(err) {
+        log.error('Not a valid bloctree project (needs bloc.json)');
+        return false;
+    }
+}
+
+prog
+.option('-A, --about', 'About the current block')
+.command('about')
+.description('About the current block')
+.action(function() {
+    var bloc = getBlocConfig();
+    if (!bloc) return false;
+
+    console.log('');
+    console.log(bloc.name.green.underline);
+    console.log(bloc.description);
+    console.log('');
+});
+
 
 // Parse and fallback to help if no args
 if(_.isEmpty(prog.parse(process.argv).args) && process.argv.length === 2) {

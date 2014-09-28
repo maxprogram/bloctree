@@ -2,10 +2,18 @@
 
 ```sh
 $ npm install -g bloctree
-$ bloctree init newProject
-$ cd newProject
+$ bloctree new newBlock
+$ cd newBlock
 $ bloctree about
 ```
+
+(Bloctree : org administration) AS (Docker : app environment)
+
+Bloctree = containerization of project administration. Just like you would run `git init` or `rails new` when starting a new codebase, you can run `bloctree new` to create a project administration folder.
+
+The folder represents the (project|company|organization|division) and contains all of its administrative data (books, accounts, legal documents, ideology, processes, etc.). The Bloctree software is your interface between the data.
+
+All files are human-readable. This is for both transparency and to make it easier to track changes over time.
 
 ## Accounting books
 
@@ -20,11 +28,12 @@ $ bloctree record expense 155.12 -m "Wireless keyboard"
 $ bloctree record sale 120 -m "2 billable hours"
 
 # Record separate entries:
-$ bloctree new:entry receivable 800 -m "Rent payment"
-$ bloctree new:entry sales 800 -m "Rent payment"
+$ bloctree new:entry [account] [--debit <amt>] [--credit <amt>]
+$ bloctree new:entry receivable -d 800 -m "Rent payment"
+$ bloctree new:entry sales -c 800 -m "Rent payment"
 
 # Build a balance sheet:
-$ bloctree get:balance [source_dir]
+$ bloctree get:balance
 ```
 
 ### Double-entry bookkeeping
