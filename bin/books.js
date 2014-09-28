@@ -6,7 +6,6 @@ var path = require('path');
 var prog = require('commander');
 var colors = require("colors");
 
-var pkg = require('../package.json');
 var util = require('../lib/util');
 var Books = require('../lib/books');
 
@@ -14,20 +13,24 @@ var log = require('./log');
 var layout = require('./layout');
 
 
-prog.version(pkg.version);
-
 var dir = process.cwd(), bloc, books;
 
-try {
-    bloc = require(path.join(dir, 'bloc.json'));
-} catch(err) {
-    console.error('Not a valid bloctree project');
+function getBlocConfig() {
+    if (bloc) return true;
+    try {
+        bloc = require(path.join(dir, 'bloc.json'));
+        return true;
+    } catch(err) {
+        log.error('Not a valid bloctree project (needs bloc.json)');
+        return false;
+    }
 }
 
 prog.command('record [name] [amount]')
 .description('Records a transaction')
 .option('-m, --message <description>', 'Description of transaction')
 .action(function(name, amount, options) {
+    if (!getBlocConfig()) return false;
     if (!name) return log.error('Need transaction name');
     if (!amount) return log.error('Need transaction amount');
 
@@ -57,6 +60,7 @@ prog.command('new:entry [name]')
 .option('-c, --credit <amount>', 'Credit')
 .option('-m, --message <description>', 'Description of transaction')
 .action(function(name, options) {
+    if (!getBlocConfig()) return false;
     if (!name) return log.error('Need account name');
     if (!options.debit && !options.credit) return log.error('Need entry amount');
 
@@ -80,6 +84,7 @@ prog.command('new:entry [name]')
 prog.command('new:account [name] [category]')
 .description('Create a new account')
 .action(function(name, category, options) {
+    if (!getBlocConfig()) return false;
     if (!name) return log.error('Need account name');
     if (!category) return log.error('Need category name or path');
 
@@ -90,7 +95,7 @@ prog.command('new:account [name] [category]')
         return books.account.add(name, category);
     })
     .then(function(account) {
-        log.report('done', 'created at: '+ path.relative(dir, account.file).cyan);
+        log.report('done', path.relative(dir, account.file).cyan + ' created');
     })
     .fail(log.error);
 });
@@ -98,6 +103,7 @@ prog.command('new:account [name] [category]')
 prog.command('get:balance')
 .description('Builds balance sheet')
 .action(function(options) {
+    if (!getBlocConfig()) return false;
     log.report('get', '%s balance sheet...', bloc.name);
 
     books = new Books(dir, options);
@@ -109,8 +115,3 @@ prog.command('get:balance')
     .then(console.log)
     .fail(log.error);
 });
-
-// Parse and fallback to help if no args
-if(_.isEmpty(prog.parse(process.argv).args) && process.argv.length === 2) {
-    prog.help();
-}

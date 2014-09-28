@@ -1,13 +1,13 @@
 {
   "name": "bloctree",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "project container blocks",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./test/index --reporter list"
   },
   "bin": {
-    "bloctree": "./bin/books.js"
+    "bloctree": "./bin/bloctree.js"
   },
   "author": "Max Olson",
   "license": "ISC",
@@ -25,5 +25,12 @@
     "colors": "~0.6.2",
     "csv": "^0.4.0",
     "accounting": "^0.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxprogram/bloctree.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maxprogram/bloctree/issues"
   }
 }

@@ -1,0 +1,20 @@
+{
+  "transactions": {
+    "expense": {
+      "debit": "expenses",
+      "credit": "cash"
+    },
+    "contribution": {
+      "debit": "cash",
+      "credit": "contributed_capital"
+    },
+    "receivable": {
+      "debit": "receivables",
+      "credit": "sales"
+    },
+    "payable": {
+      "debit": "expense",
+      "credit": "payables"
+    }
+  }
+}
