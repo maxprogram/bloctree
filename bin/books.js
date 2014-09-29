@@ -133,7 +133,9 @@ prog.command('get:balance')
     .then(function() {
         if (!books.isBalanced()) log.error('Accounts are unbalanced!');
     })
-    .then(books.getBalanceSheet)
+    .then(function() {
+        return books.getBalanceSheet();
+    })
     .then(function(bs) {
         return layout.printBalanceSheet(bs);
     })
