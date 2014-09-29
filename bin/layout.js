@@ -45,7 +45,7 @@ Lines.prototype = {
         amount = ' ' + accounting.formatMoney(amount, {
             symbol: '',
             precision: 2,
-            format: { pos: '%s %v ', neg: '%s(%v)', zero: '--' }
+            format: { pos: '%s %v ', neg: '%s(%v)', zero: '--  ' }
         });
 
         line.splice(0, name.length, name);

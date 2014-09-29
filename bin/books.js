@@ -26,6 +26,28 @@ function getBlocConfig() {
     }
 }
 
+prog.command('ls:accounts')
+.description('Lists book accounts')
+.action(function() {
+    books = new Books(dir);
+
+    function space(txt, len) {
+        return txt + new Array(len - txt.length).join(' ');
+    }
+
+    books.getAccountList()
+    .then(function() {
+        books.accounts.forEach(function(a) {
+            console.log([
+                space(a.type, 12).cyan,
+                a.id.toString().green,
+                a.group ? a.group.grey : null,
+                a.name
+            ].join(' '));
+        });
+    });
+});
+
 prog.command('record [name] [amount]')
 .description('Records a transaction')
 .option('-m, --message <description>', 'Description of transaction')
@@ -108,6 +130,9 @@ prog.command('get:balance')
 
     books = new Books(dir, options);
     books.getAccounts()
+    .then(function() {
+        if (!books.isBalanced()) log.error('Accounts are unbalanced!');
+    })
     .then(books.getBalanceSheet)
     .then(function(bs) {
         return layout.printBalanceSheet(bs);
