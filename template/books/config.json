@@ -1,20 +1,46 @@
 {
-  "transactions": {
-    "expense": {
+  "transactions": [
+    {
+      "name": ["revenue","sale"],
+      "debit": "cash",
+      "credit": "sales",
+      "description": "Cash sale"
+    },
+    {
+      "name": ["deferred","deferred_sale","deferred_revenue"],
+      "debit": "cash",
+      "credit": "deferred_revenue"
+    },
+    {
+      "name": ["expense"],
       "debit": "expenses",
       "credit": "cash"
     },
-    "contribution": {
+    {
+      "name": ["contribution","equity","funding"],
       "debit": "cash",
       "credit": "contributed_capital"
     },
-    "receivable": {
+    {
+      "name": ["receivable"],
       "debit": "receivables",
       "credit": "sales"
     },
-    "payable": {
+    {
+      "name": ["payable"],
       "debit": "expense",
       "credit": "payables"
+    },
+    {
+      "name": ["property","pp&e","equipment","capex"],
+      "debit": "property",
+      "credit": "cash",
+      "description": "Property purchase"
+    },
+    {
+      "name": ["depreciation","depreciate"],
+      "debit": "depreciation",
+      "credit": "accumulated_depreciation"
     }
-  }
+  ]
 }

@@ -62,12 +62,14 @@ prog.command('record [name] [amount]')
     .then(function() {
         return books.getConfig();
     }).then(function(config) {
-        var transaction = config.transactions[name];
+        var transaction = _.where(config.transactions, function(t) {
+            return _.contains(t.name, name.trim().toLowerCase());
+        })[0];
         if (!transaction) return Q.reject('Transaction name not found');
 
         return books.record.transaction(transaction.debit, transaction.credit, {
             debit: amount,
-            description: options.message
+            description: options.message || transaction.description
         });
     })
     .then(function(entries) {
