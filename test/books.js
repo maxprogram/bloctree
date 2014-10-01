@@ -39,17 +39,17 @@ describe('#getAccounts', function() {
     });
 });
 
-describe('#isBalanced', function() {
-    it('should return true if books balance', function() {
-        var isBalanced = books.isBalanced();
-        expect(isBalanced).to.be.true;
+describe('#getBalance', function() {
+    it('should return 0 if books balance', function() {
+        var blnc = books.getBalance();
+        expect(blnc).to.equal(0);
     });
 
     it('should return false if books don\'t balance', function() {
         var bad = _.cloneDeep(books.accounts);
-        bad[0].entries[0][2] += 1;
-        var isBalanced = books.isBalanced(bad);
-        expect(isBalanced).to.be.false;
+        bad[0].entries[0][2] = parseFloat(bad[0].entries[0][2]) + 1;
+        var blnc = books.getBalance(bad);
+        expect(blnc).to.equal(1);
     });
 });
 

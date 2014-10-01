@@ -28,7 +28,7 @@
     },
     {
       "name": ["payable"],
-      "debit": "expense",
+      "debit": "expenses",
       "credit": "payables"
     },
     {

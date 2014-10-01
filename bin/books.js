@@ -133,7 +133,8 @@ prog.command('get:balance')
     books = new Books(dir, options);
     books.getAccounts()
     .then(function() {
-        if (!books.isBalanced()) log.error('Accounts are unbalanced!');
+        var blnc = books.getBalance();
+        if (blnc) log.error('Accounts are unbalanced! (difference of '+blnc.red+')');
     })
     .then(function() {
         return books.getBalanceSheet();
