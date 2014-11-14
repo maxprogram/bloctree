@@ -2,18 +2,32 @@ var expect = require('chai').expect;
 var Q = require('q');
 var _ = require('lodash');
 var fs = require('../lib/fs');
+var path = require('path');
 
 var Books = require('../lib/books');
 
 var BOOKS = {
-    a: new Books(__dirname + '/block-a')
+    a: './block-a',
+    test: './test-block'
 };
 
-var accts, id;
+var id, books;
+
+function join(p) { return path.join(__dirname, p); }
+before(function(done) {
+    fs.copy(join(BOOKS.a), join(BOOKS.test))
+    .then(function() {
+        books = new Books(join(BOOKS.test));
+    }).then(done, done);
+});
+
+after(function(done) {
+    fs.remove(join(BOOKS.test))
+    .then(done, done)
+});
+
 
 describe('', function() {
-
-var books = BOOKS.a;
 
 describe('#getAccountList', function() {
     it('should output accounts list', function(done) {
@@ -64,8 +78,6 @@ describe('#getBalanceSheet', function() {
 });
 
 describe('#record', function() {
-
-var books = BOOKS.a;
 
 describe('#entry()', function() {
     it('should add entry to account', function(done) {
@@ -129,8 +141,6 @@ describe('#transaction()', function() {
 });
 
 describe('#account', function() {
-
-var books = BOOKS.a;
 
 describe('#add()', function() {
     it('should add a new account', function(done) {
