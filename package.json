@@ -1,6 +1,6 @@
 {
   "name": "bloctree",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "project container blocks",
   "main": "index.js",
   "scripts": {
