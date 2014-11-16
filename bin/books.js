@@ -51,6 +51,7 @@ prog.command('ls:accounts')
 prog.command('record [name] [amount]')
 .description('Records a transaction')
 .option('-m, --message <description>', 'Description of transaction')
+.option('-D, --date <date>', 'Date of transaction')
 .action(function(name, amount, options) {
     if (!getBlocConfig()) return false;
     if (!name) return log.error('Need transaction name');
@@ -69,7 +70,8 @@ prog.command('record [name] [amount]')
 
         return books.record.transaction(transaction.debit, transaction.credit, {
             debit: amount,
-            description: options.message || transaction.description
+            description: options.message || transaction.description,
+            datetime: options.date
         });
     })
     .then(function(entries) {
@@ -83,6 +85,7 @@ prog.command('new:entry [name]')
 .option('-d, --debit <amount>', 'Debit')
 .option('-c, --credit <amount>', 'Credit')
 .option('-m, --message <description>', 'Description of transaction')
+.option('-D, --date <date>', 'Date of transaction')
 .action(function(name, options) {
     if (!getBlocConfig()) return false;
     if (!name) return log.error('Need account name');
@@ -95,7 +98,8 @@ prog.command('new:entry [name]')
         return books.record.entry(name, {
             debit: options.debit || 0,
             credit: options.credit || 0,
-            description: options.message
+            description: options.message,
+            datetime: options.date
         });
     })
     .then(function(entries) {

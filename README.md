@@ -15,6 +15,10 @@ The folder represents the (project|company|organization|division) and contains a
 
 All files are human-readable. This is for both transparency and to make it easier to track changes over time.
 
+## Updating
+
+To migrate your Bloctree to a new version, after updating the Bloctree software, run `bloctree migrate`. Adding `-v 0.0.0` will specify the version to migrate to.
+
 ## Accounting books
 
 ```sh

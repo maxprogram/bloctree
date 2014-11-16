@@ -2,7 +2,7 @@
 
 - [x] Entries: Serial IDs > Hash to avoid conflicts
 - [x] System to migrate to new updates
-- [ ] Allow Date specification in transaction/entry record
+- [x] Allow Date specification in transaction/entry record
 - [ ] Pretty print account summary
 - [ ] Income Statement + pretty print
 - [ ] List entries for certain time period

@@ -27,8 +27,6 @@ after(function(done) {
 });
 
 
-describe('', function() {
-
 describe('#getAccountList', function() {
     it('should output accounts list', function(done) {
         books.getAccountList()
@@ -75,7 +73,6 @@ describe('#getBalanceSheet', function() {
     });
 });
 
-});
 
 describe('#record', function() {
 
@@ -83,11 +80,16 @@ describe('#entry()', function() {
     it('should add entry to account', function(done) {
         books.record.entry("cash", {
             debit: 88,
-            description: 'test'
+            description: 'test',
+            datetime: '2014-9-14'
         }).then(function(entry) {
-            id = entry[0];
-            expect(entry[2]).to.equal(88);
-            expect(entry[5]).to.equal('test');
+            id = entry[books.record._getIdx('id')];
+            date = new Date(entry[books.record._getIdx('datetime')]);
+            debit = entry[books.record._getIdx('debit')];
+            desc = entry[books.record._getIdx('description')];
+            expect(date.getFullYear()).to.equal(2014);
+            expect(debit).to.equal(88);
+            expect(desc).to.equal('test');
         }).then(done, done);
     });
 });
